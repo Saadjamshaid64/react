@@ -27,9 +27,11 @@ export default function TextForm(props) {
     }
 
     const handleCopy = () => {
-        let text = document.getElementById('myBox')
-        text.select();   // to select the text
-        navigator.clipboard.writeText(text.value)
+        // let text = document.getElementById('myBox')
+        // text.select();   // to select the text
+        navigator.clipboard.writeText(text)
+        // navigator.clipboard.writeText(text.value)
+        // document.getSelection().removeAllRanges()   // get selection is a function - (removeallranges is a function - go selected text ho ga wo remove ho gaye ga)
         props.showAlert("Copied to Clipboard!", "success")
     }
 
@@ -40,10 +42,10 @@ export default function TextForm(props) {
     }
 
 
-    const Capitalize = (word) => {
-        let newText = word.toLowerCase();
-        return newText.charAt(0).toUpperCase() + newText.slice(1)
-    }
+    // const Capitalize = (word) => {
+    //     let newText = word.toLowerCase();
+    //     return newText.charAt(0).toUpperCase() + newText.slice(1)
+    // }
 
 
     // Declare a new state variable, which we'll call "text"
@@ -57,28 +59,29 @@ export default function TextForm(props) {
     return (
         <>
             <div className='cotainer'>
-                <h1>{props.heading}</h1>
+                <h1 className='mb-2'>{props.heading}</h1>
                 <div className="mb-3">
-                    <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
-                    {/* <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode==='dark'?'grey':'white', color: props.mode==='dark'?'white':'black'}} id="myBox" rows="8"></textarea> */}
+                    {/* <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea> */}
+                    <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode==='dark'?'#13466e':'white', color: props.mode==='dark'?'white':'#042743'}} id="myBox" rows="8"></textarea>
                 </div>
-                <button className="btn btn-primary mx-2" onClick={handleUpClick}>Convert to UpperCase</button>
-                <button className="btn btn-primary mx-2" onClick={handleLoClick}>Convert to LowerCase</button>
-                <button className="btn btn-primary mx-2" onClick={handleClearClick}>Clear Text</button>
-                <button className="btn btn-primary mx-2" onClick={handleCopy}>Copy Text</button>
-                <button className="btn btn-primary mx-2" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
-                <button className="btn btn-primary mx-2" onClick={Capitalize(text)}>Capitalize</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to UpperCase</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>Convert to LowerCase</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClearClick}>Clear Text</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCopy}>Copy Text</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+                {/* <button className="btn btn-primary mx-1 my-1" onClick={Capitalize(text)}>Capitalize</button> */}
                 {/* <button className="btn btn-primary mx-2" onClick={() => {
                     handleUpClick();
                     wordcheck();
                 }}>Convert to LowerCase</button> */}
             </div>
             <div className="container my-2">
-                <h2>Your text Summary</h2>
-                <p>{text.split(" ").length} words and {text.length} characters</p>  {/* go text ki length ho gi wo number of characters ho gay */}
-                <p>{0.008 * text.split(" ").length} Minutes Read</p>
+                <h2>Your text Summary</h2>  {/* \s means any white spaces with includeing new line */}
+                <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>  {/* go text ki length ho gi wo number of characters ho gay */}
+                <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} Minutes Read</p>
                 <h2>Preview</h2>
-                <p>{text.length > 0 ? text : "Enter something in the textbox above to preview it here"}</p>  {/* {this.text} used for class based component */}
+                {/* <p>{text.length > 0 ? text : "Enter something in the textbox above to preview it here"}</p>  {this.text} used for class based component */}
+                <p>{text.length > 0 ? text : "Nothing to Preview!"}</p>
             </div>
         </>
     )
