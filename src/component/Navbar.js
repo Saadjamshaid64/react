@@ -20,12 +20,13 @@ export default function Navbar(props) {   // props is a properties
                              <Link className="nav-link" to="/about">{props.abouttext}</Link>
                         </li>
                     </ul>
-                    // <div className="d_flex">
-                    //     <div className="bg-primary rounded mx-2" onClick={()=>{props.tooglemode('primary')}} style={{height:'25px',width:'25px', cursor: 'pointer'}}></div>
-                    //     <div className="bg-danger rounded mx-2" onClick={()=>{props.tooglemode('danger')}} style={{height:'25px',width:'25px', cursor: 'pointer'}}></div>
-                    //     <div className="bg-success rounded mx-2" onClick={()=>{props.tooglemode('success')}} style={{height:'25px',width:'25px', cursor: 'pointer'}}></div>
-                    //     <div className="bg-warning rounded mx-2" onClick={()=>{props.tooglemode('warning')}} style={{height:'25px',width:'25px', cursor: 'pointer'}}></div>
-                    // </div>
+
+                    {/* <div className="d_flex">
+                        <div className="bg-primary rounded mx-2" onClick={()=>{props.tooglemode('primary')}} style={{height:'25px',width:'25px', cursor: 'pointer'}}></div>
+                        <div className="bg-danger rounded mx-2" onClick={()=>{props.tooglemode('danger')}} style={{height:'25px',width:'25px', cursor: 'pointer'}}></div>
+                        <div className="bg-success rounded mx-2" onClick={()=>{props.tooglemode('success')}} style={{height:'25px',width:'25px', cursor: 'pointer'}}></div>
+                        <div className="bg-warning rounded mx-2" onClick={()=>{props.tooglemode('warning')}} style={{height:'25px',width:'25px', cursor: 'pointer'}}></div>
+                    </div> */}
                     {/* <div className={`form-check form-switch text-${props.textchange}`}> */}
                     <div className={`form-check form-switch text-${props.mode === 'light'?'dark':'light'}`}>
                         <input className="form-check-input" onClick={()=>{props.tooglemode(null)}} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
